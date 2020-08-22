@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BridgeApp", "BridgeApp\Brid
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BridgeApp.Services", "BridgeApp.Services\BridgeApp.Services.csproj", "{B8FB76EE-FD48-4E19-9935-C558045F7B4A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{671DF75F-B0A9-447F-B245-10617B9EC665}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BridgeApp.Services.Tests", "Tests\BridgeApp.Services.Tests\BridgeApp.Services.Tests.csproj", "{C9233650-B77E-41D7-A819-84B15DD17623}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,16 @@ Global
 		{B8FB76EE-FD48-4E19-9935-C558045F7B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8FB76EE-FD48-4E19-9935-C558045F7B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8FB76EE-FD48-4E19-9935-C558045F7B4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9233650-B77E-41D7-A819-84B15DD17623}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9233650-B77E-41D7-A819-84B15DD17623}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9233650-B77E-41D7-A819-84B15DD17623}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9233650-B77E-41D7-A819-84B15DD17623}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C9233650-B77E-41D7-A819-84B15DD17623} = {671DF75F-B0A9-447F-B245-10617B9EC665}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E4C317C2-19C8-4750-8D95-086140055052}
