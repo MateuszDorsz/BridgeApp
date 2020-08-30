@@ -5,9 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Game\" />
     <Folder Include="Lobby\" />
     <Folder Include="User\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BridgeApp.Model\BridgeApp.Model.csproj" />
   </ItemGroup>
 
 </Project>
