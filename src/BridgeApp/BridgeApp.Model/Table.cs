@@ -2,6 +2,10 @@
 {
     public class Table
     {
-        private int Id { get; set; }
+        public Table(int id)
+        {
+            Id = id;
+        }
+        public int Id { get; private set; }
     }
 }
