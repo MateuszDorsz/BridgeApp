@@ -14,7 +14,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BridgeApp.Areas.Identity;
+using BridgeApp.Conts;
 using BridgeApp.Data;
+using BridgeApp.Hubs;
+using BridgeApp.Services.Game;
 
 namespace BridgeApp
 {
@@ -40,6 +43,7 @@ namespace BridgeApp
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<ITableService, TableService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +74,7 @@ namespace BridgeApp
                 endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
+                endpoints.MapHub<LobbyHub>(Url.LobbyHub);
             });
         }
     }

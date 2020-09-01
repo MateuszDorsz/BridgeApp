@@ -2,6 +2,23 @@
 @inherits LobbyBase
 
 <h1 class="card-title">Lobby</h1>
+<button type="button" @onclick="AddNewTable">Add New Table</button>
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th>Tables</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var table in Tables)
+        {
+            <tr>
+                <td> Table @table.Id</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 
 

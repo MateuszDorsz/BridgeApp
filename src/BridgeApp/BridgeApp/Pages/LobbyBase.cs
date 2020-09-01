@@ -1,20 +1,42 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BridgeApp.Conts;
+using BridgeApp.Model;
 using BridgeApp.Services.Game;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace BridgeApp.Pages
 {
     public class LobbyBase : ComponentBase
     {
+        private HubConnection _connection;
+
         [Inject] 
-        public ITableService TableService { get; }
+        public ITableService TableService { get; set; }
+        [Inject]
+        protected NavigationManager NavigationManager { get; set; }
 
 
+        public IEnumerable<Table> Tables { get; set; }
 
-        protected override Task OnInitializedAsync()
+
+        protected override async Task OnInitializedAsync()
         {
+            _connection = new HubConnectionBuilder().WithUrl(NavigationManager.ToAbsoluteUri(Url.LobbyHub), options =>
+            {
+                //ToDo - add options
+            }).Build();
+            _connection.On(LobbyMessage.TablesUpdated, StateHasChanged);
+            Tables = await TableService.GetTables();
+            await _connection.StartAsync();
+            await base.OnInitializedAsync();
+        }
 
-            return base.OnInitializedAsync();
+        public async Task AddNewTable()
+        {
+            await TableService.CreateNew();
+            await _connection.SendAsync(LobbyMessage.TablesUpdated);
         }
     }
 }
