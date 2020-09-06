@@ -75,6 +75,7 @@ namespace BridgeApp
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
                 endpoints.MapHub<LobbyHub>(Url.LobbyHub);
+                endpoints.MapHub<TableHub>(Url.TableHub + "{0}");
             });
         }
     }
