@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BridgeApp.Context;
 using BridgeApp.Conts;
 using BridgeApp.Services.Game;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace BridgeApp.Pages.Table
@@ -16,18 +19,17 @@ namespace BridgeApp.Pages.Table
         public ITableService TableService { get; set; }
         [Inject]
         protected NavigationManager NavigationManager { get; set; }
+        [Inject]
+        protected IHttpContextAccessor ContextAccessor { get; set; }
+        
 
         [Parameter]
         public string TableId { get; set; }
 
         public Model.Table Table { get; set; }
 
-        public IEnumerable<string> ChatMessages { get; private set; }
+        public IList<string> ChatMessages { get; private set; }
 
-        private async Task GetChatMessages()
-        {
-            ChatMessages = await Table.TableChat.GetChatHistory();
-        }
 
         protected override async Task OnInitializedAsync()
         {
@@ -36,21 +38,19 @@ namespace BridgeApp.Pages.Table
                 //ToDo - add options
             }).Build();
             Table = await TableService.GetTable(int.Parse(TableId));
-            ChatMessages = await Table.TableChat.GetChatHistory();
-            _connection.On(TableMessage.PlayerJoined, async () =>
+            ChatMessages = new List<string>();
+            
+            _connection.On<string>(nameof(ITableHost.SendPlayerJoined), async (message) =>
             {
-                await GetChatMessages();
+                ChatMessages.Add(message);
                 StateHasChanged();
             });
-            _connection.On(TableMessage.PlayerLeft, async () =>
-            {
-                await Table.TableChat.Send("Player left", "system");
-                await GetChatMessages();
-                StateHasChanged();
-            });
+
             await _connection.StartAsync();
+            var joinedMessage = "system: New player joined: " + ContextAccessor.HttpContext.User.Identity.Name;
+            await _connection.SendAsync(nameof(ITableHost.SendPlayerJoined), joinedMessage);
+            
             await base.OnInitializedAsync();
-            await Table.TableChat.Send("New player joined", "system");
             await _connection.SendAsync(TableMessage.PlayerJoined);
         }
     }

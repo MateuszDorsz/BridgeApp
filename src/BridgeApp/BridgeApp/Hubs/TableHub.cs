@@ -1,31 +1,14 @@
-﻿using System;
-using System.Threading.Tasks;
-using BridgeApp.Conts;
+﻿using System.Threading.Tasks;
+using BridgeApp.Context;
 using Microsoft.AspNetCore.SignalR;
 
 namespace BridgeApp.Hubs
 {
-    public class TableHub : Hub
+    public class TableHub : Hub<ITableHost>, ITableHost
     {
-        public async Task PlayerJoined()
+        public async Task SendPlayerJoined(string username)
         {
-            await Clients.All.SendAsync(TableMessage.PlayerJoined);
-        }
-
-        public async Task PlayerDisconectedTask()
-        {
-            await Clients.Others.SendAsync(TableMessage.PlayerLeft);
-        }
-
-        public override Task OnConnectedAsync()
-        {
-            
-            return base.OnConnectedAsync();
-        }
-
-        public override Task OnDisconnectedAsync(Exception exception)
-        {
-            return base.OnDisconnectedAsync(exception);
+            await Clients.Others.SendPlayerJoined(username);
         }
     }
 }
