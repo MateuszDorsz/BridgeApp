@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BridgeApp.Model;
@@ -21,7 +22,7 @@ namespace BridgeApp.Services.Game
             _lock.EnterWriteLock();
             try
             {
-                var table = new Table(_tables.Count);
+                var table = new Table(_tables.Count + 1);
                 _tables.Add(table);
                 return await Task.FromResult(table.Id);
             }
@@ -48,6 +49,19 @@ namespace BridgeApp.Services.Game
             {
                 _lock.ExitReadLock();
             }
+        }
+
+        public async Task<Table> GetTable(int id)
+        {
+            _lock.EnterReadLock();
+            try
+            {
+                return await Task.FromResult(_tables.First(t => t.Id == id));
+            }
+            finally
+            {
+                _lock.ExitReadLock();
+            }        
         }
     }
 }

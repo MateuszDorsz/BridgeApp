@@ -12,5 +12,7 @@ namespace BridgeApp.Services.Game
         Task DeleteInactive();
 
         Task<IEnumerable<Table>> GetTables();
+
+        Task<Table> GetTable(int id);
     }
 }

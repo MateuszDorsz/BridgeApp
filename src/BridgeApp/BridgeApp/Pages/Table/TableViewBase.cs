@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BridgeApp.Context;
 using BridgeApp.Conts;
 using BridgeApp.Services.Game;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace BridgeApp.Pages.Table
@@ -45,9 +43,11 @@ namespace BridgeApp.Pages.Table
                 ChatMessages.Add(message);
                 StateHasChanged();
             });
-
+            string username = string.IsNullOrEmpty(ContextAccessor.HttpContext.User.Identity.Name)
+                ? "unknown"
+                : ContextAccessor.HttpContext.User.Identity.Name;
             await _connection.StartAsync();
-            var joinedMessage = "system: New player joined: " + ContextAccessor.HttpContext.User.Identity.Name;
+            var joinedMessage = "system: New player joined: " + username;
             await _connection.SendAsync(nameof(ITableHost.SendPlayerJoined), joinedMessage);
             
             await base.OnInitializedAsync();
