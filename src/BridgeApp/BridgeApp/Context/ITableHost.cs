@@ -9,5 +9,7 @@ namespace BridgeApp.Context
     public interface ITableHost
     {
         Task SendPlayerJoined(string message);
+
+        Task SendPlayerDisconnected(string username);
     }
 }
