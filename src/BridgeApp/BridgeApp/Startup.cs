@@ -41,6 +41,7 @@ namespace BridgeApp
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddHttpContextAccessor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<ITableService, TableService>();
@@ -75,6 +76,7 @@ namespace BridgeApp
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
                 endpoints.MapHub<LobbyHub>(Url.LobbyHub);
+                endpoints.MapHub<TableHub>(Url.TableHub + "{0}");
             });
         }
     }

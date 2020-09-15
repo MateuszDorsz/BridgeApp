@@ -8,5 +8,6 @@ namespace BridgeApp.Conts
     public class Url
     {
         public const string LobbyHub = "/lobbyhub";
+        public const string TableHub = "/tablehub/";
     }
 }

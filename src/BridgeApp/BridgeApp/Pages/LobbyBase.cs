@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BridgeApp.Conts;
-using BridgeApp.Model;
 using BridgeApp.Services.Game;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -18,7 +17,7 @@ namespace BridgeApp.Pages
         protected NavigationManager NavigationManager { get; set; }
 
 
-        public IEnumerable<Table> Tables { get; set; }
+        public IEnumerable<Model.Table> Tables { get; set; }
 
 
         protected override async Task OnInitializedAsync()

@@ -1,0 +1,9 @@
+﻿@page "/tableview/{TableId}"
+@inherits TableViewBase
+
+<h1 class="card-title">Table @Table.Id</h1>
+
+@foreach (var text in ChatMessages)
+{
+    <h6>@text</h6>
+}

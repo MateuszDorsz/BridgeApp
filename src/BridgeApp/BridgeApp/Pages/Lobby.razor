@@ -14,7 +14,7 @@
         @foreach (var table in Tables)
         {
             <tr>
-                <td> Table @table.Id</td>
+                <td><a href="@($"/tableview/{table.Id}")" class="table-responsive-md">Table @table.Id</a> </td>
             </tr>
         }
     </tbody>
