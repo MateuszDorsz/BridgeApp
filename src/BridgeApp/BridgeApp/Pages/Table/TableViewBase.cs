@@ -13,9 +13,12 @@ namespace BridgeApp.Pages.Table
     {
         private HubConnection _connection;
 
-        [Inject] public ITableService TableService { get; set; }
-        [Inject] protected NavigationManager NavigationManager { get; set; }
-        [Inject] protected IHttpContextAccessor ContextAccessor { get; set; }
+        [Inject] 
+        public ITableService TableService { get; set; }
+        [Inject] 
+        protected NavigationManager NavigationManager { get; set; }
+        [Inject] 
+        protected IHttpContextAccessor ContextAccessor { get; set; }
 
 
         [Parameter] public string TableId { get; set; }
