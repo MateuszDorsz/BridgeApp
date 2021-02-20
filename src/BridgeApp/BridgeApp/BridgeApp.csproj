@@ -20,8 +20,4 @@
     <ProjectReference Include="..\BridgeApp.Services\BridgeApp.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Identity\" />
-  </ItemGroup>
-
 </Project>

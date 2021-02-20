@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Lobby\" />
-    <Folder Include="User\" />
   </ItemGroup>
 
   <ItemGroup>
