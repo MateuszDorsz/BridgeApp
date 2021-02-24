@@ -19,6 +19,7 @@ using BridgeApp.Data;
 using BridgeApp.Hubs;
 using BridgeApp.Services.Game;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace BridgeApp
 {
@@ -39,6 +40,7 @@ namespace BridgeApp
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie();
 
